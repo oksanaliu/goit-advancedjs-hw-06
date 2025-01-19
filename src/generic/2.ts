@@ -8,16 +8,15 @@ type AllType = {
   name: string;
   position: number;
   color: string;
-  weight: number
-}
+  weight: number;
+};
 
-function compare (top, bottom): AllType {
+function compare(top: Partial<AllType>, bottom: Partial<AllType>): AllType {
   return {
-    name: top.name,
-    color: top.color,
-    position: bottom.position,
-    weight: bottom.weight,
-  }
+    name: top.name || bottom.name || '',
+    color: top.color || bottom.color || '',
+    position: bottom.position || top.position || 0,
+    weight: bottom.weight || top.weight || 0,
+  };
 }
-
 export {};
