@@ -11,12 +11,16 @@ type AllType = {
   weight: number;
 };
 
-function compare(top: Partial<AllType>, bottom: Partial<AllType>): AllType {
+function compare<T extends keyof AllType>(
+  top: Pick<AllType, T>,
+  bottom: Pick<AllType, T>
+): AllType {
   return {
-    name: top.name || bottom.name || '',
-    color: top.color || bottom.color || '',
-    position: bottom.position || top.position || 0,
-    weight: bottom.weight || top.weight || 0,
+    name: (top as AllType).name || (bottom as AllType).name || '',
+    color: (top as AllType).color || (bottom as AllType).color || '',
+    position: (bottom as AllType).position || (top as AllType).position || 0,
+    weight: (bottom as AllType).weight || (top as AllType).weight || 0,
   };
 }
+
 export {};
